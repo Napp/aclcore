@@ -1,0 +1,10 @@
+/vendor
+/.idea
+/.vagrant
+.php_cs.cache
+_ide_helper.php
+.phpstorm.meta.php
+coverage
+coverage.xml
+composer.lock
+phpunit.local.xml

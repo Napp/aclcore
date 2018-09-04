@@ -1,0 +1,38 @@
+language: php
+
+php:
+  - 7.1
+  - 7.2
+
+sudo: true
+
+env:
+  global:
+    - DB_PASSWORD=''
+    - DB_USERNAME=root
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+before_script:
+  - sudo mysql_upgrade
+  - sudo service mysql restart
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS db_testing;'
+  - composer install --no-interaction
+  - composer dump-autoload
+
+script:
+  - vendor/bin/phpunit --coverage-clover=coverage.xml
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+services:
+  - mysql
+
+addons:
+  apt:
+    sources:
+      - mysql-5.7-trusty
+    packages:
+      - mysql-server
+      - mysql-client
