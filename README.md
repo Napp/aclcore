@@ -87,7 +87,7 @@ Napp\Core\Acl\PermissionRegistrar::register([
 ]);
 ```
 
-### Middleware
+### Register Middleware
 
 Add the middleware to `App/Http/Kernal.php`
 
@@ -96,7 +96,7 @@ protected $routeMiddleware = [
     'may' => \Napp\Core\Acl\Middleware\Authorize::class,
 ```
 
-use it like this:
+usage:
 
 ```php
 Route::get('users', ['uses' => 'UsersController@index'])->middleware('may:users.view');

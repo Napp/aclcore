@@ -60,7 +60,6 @@ class AclService implements AclServiceInterface
         }
 
         $permissionAction = $allPermissions[$permission];
-        //dd($permission, $permissionAction);
         // simple permission check - no closure
         if ($permissionAction === $permission) {
             return true;
