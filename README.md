@@ -23,12 +23,37 @@ You can publish the config file with:
 php artisan vendor:publish --provider="Napp\Core\Acl\AclServiceProvider" --tag="config"
 ```
 
-When published - then review it and change accordingly to your applications.
+When published - then review it and change accordingly to your applications. The config files `config/acl.php` contains:
+
+```php
+return [
+    /**
+     * Define which Eloquent models used by the package
+     */
+    'models' => [
+        'role' => Napp\Core\Acl\Model\Role::class,
+        'user' => Illuminate\Foundation\Auth\User::class,
+    ],
+
+    /**
+     * Table names for the package
+     */
+    'table_names' => [
+        'roles' => 'roles',
+        'users_roles' => 'users_roles',
+    ],
+
+    /**
+     * The default guard used to authorize users
+     */
+    'guard' => 'web'
+];
+```
 
 
 ## Usage
 
-Add trait to your User model:
+Add `HasRole` trait to your User model:
 
 ```php
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -78,16 +103,44 @@ Route::get('users', ['uses' => 'UsersController@index'])->middleware('may:users.
 ```
 
 
-### In php code
+### Usage in php code
 
 ```php
-if (!may('users.view')) {
+
+// authorize a single permission
+if (may('users.view')) {
+    // do something
+}
+
+// authorize if **any** of the permissions are valid
+if (may(['users.view', 'users.create'])) {
+    // do something
+}
+
+// authorize if **all** of the permissions are valid
+if (mayall(['users.view', 'users.create'])) {
+    // do something
+}
+
+// reverse - not logic
+if (maynot('users.view')) {
     return abort();
 }
+
+// check for user role
+if (has_role($user, 'manager')) {
+    // do something
+}
+
+// check if user has many roles
+if (has_role($user, ['support', 'hr'])) {
+    // do something
+}
+
 ```
 
 
-### Blade Extensions
+### Usage in Blade
 
 `may` is equivalent to default `can` from Laravel.
 
@@ -105,6 +158,14 @@ Check if user has **any** of the permissions
 @endmay
 ```
 
+Check if user have **all** of the permissions
+
+```php
+@mayall(['users.create', 'users.update'])
+    <a href="my-link">Create</a>
+@endmayall
+```
+
 Use `maynot` for reverse logic
 
 ```php
@@ -120,3 +181,6 @@ Check if user has a specific role
     <a href="my-link">Create</a>
 @endhasrole
 ```
+
+
+See PHPUnit tests for more examples and usage.

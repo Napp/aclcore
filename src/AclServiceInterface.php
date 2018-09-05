@@ -47,11 +47,17 @@ interface AclServiceInterface
      * @param string|array $permission
      * @return bool
      */
-    public function may($permission) : bool;
+    public function may($permission): bool;
 
     /**
      * @param string|array $permission
      * @return bool
      */
-    public function maynot($permission) : bool;
+    public function maynot($permission): bool;
+
+    /**
+     * @param array $permissions
+     * @return bool
+     */
+    public function mayall(array $permissions): bool;
 }

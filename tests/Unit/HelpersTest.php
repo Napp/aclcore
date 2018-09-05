@@ -49,6 +49,27 @@ class HelpersTest extends TestCase
         $this->assertTrue(may('users.create'));
     }
 
+    public function test_maynot_helper_with_permission()
+    {
+        $this->actingAs($this->managerUser);
+        $this->assertTrue(maynot('users.destroy'));
+        $this->assertFalse(maynot('users.create'));
+    }
+
+    /** @group me */
+    public function test_mayall_helper_with_permission()
+    {
+        $this->actingAs($this->managerUser);
+        $this->assertFalse(mayall(['users.create', 'users.destroy']));
+        $this->assertTrue(mayall(['users.view', 'users.create']));
+    }
+
+    public function test_has_role_helper_with_permission()
+    {
+        $this->actingAs($this->managerUser);
+        $this->assertTrue(has_role($this->managerUser, 'manager'));
+        $this->assertFalse(has_role($this->adminUser, 'manager'));
+    }
 
 
 

@@ -40,23 +40,30 @@ class AclServiceProvider extends ServiceProvider
     {
         $this->app->afterResolving('blade.compiler', function (BladeCompiler $bladeCompiler) {
             $bladeCompiler->directive('hasrole', function ($role) {
-                return "<?php if(acl()->userHasRole({$role})): ?>";
+                return "<?php if(has_role({$role})): ?>";
             });
             $bladeCompiler->directive('endhasrole', function () {
                 return '<?php endif; ?>';
             });
 
             $bladeCompiler->directive('may', function ($permission) {
-                return "<?php if(acl()->may({$permission})): ?>";
+                return "<?php if(may({$permission})): ?>";
             });
             $bladeCompiler->directive('endmay', function () {
                 return '<?php endif; ?>';
             });
 
             $bladeCompiler->directive('maynot', function ($permission) {
-                return "<?php if(acl()->maynot({$permission})): ?>";
+                return "<?php if(maynot({$permission})): ?>";
             });
             $bladeCompiler->directive('endmaynot', function () {
+                return '<?php endif; ?>';
+            });
+
+            $bladeCompiler->directive('mayall', function ($permissions) {
+                return "<?php if(mayall({$permissions})): ?>";
+            });
+            $bladeCompiler->directive('endmayall', function () {
                 return '<?php endif; ?>';
             });
         });

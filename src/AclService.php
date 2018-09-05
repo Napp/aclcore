@@ -60,6 +60,7 @@ class AclService implements AclServiceInterface
         }
 
         $permissionAction = $allPermissions[$permission];
+        //dd($permission, $permissionAction);
         // simple permission check - no closure
         if ($permissionAction === $permission) {
             return true;
@@ -141,7 +142,7 @@ class AclService implements AclServiceInterface
      * @param string|array $permission
      * @return bool
      */
-    public function may($permission) : bool
+    public function may($permission): bool
     {
         $user = auth(config('acl.guard'))->user();
 
@@ -156,8 +157,17 @@ class AclService implements AclServiceInterface
      * @param string|array $permission
      * @return bool
      */
-    public function maynot($permission) : bool
+    public function maynot($permission): bool
     {
         return !$this->may($permission);
+    }
+
+    /**
+     * @param array $permissions
+     * @return bool
+     */
+    public function mayall(array $permissions): bool
+    {
+        return $this->hasAllPermissions($permissions, auth(config('acl.guard'))->user());
     }
 }

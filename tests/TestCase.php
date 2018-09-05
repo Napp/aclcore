@@ -154,6 +154,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
 
     private function seedData()
     {
+        // create test roles
         Role::create(['name' => 'superuser', 'slug'=> 'superuser', 'permissions' => null, 'access_level' => 1, 'is_default' => null]);
         Role::create(['name' => 'admin', 'slug'=> 'admin', 'permissions' => null, 'access_level' => 2, 'is_default' => null]);
         Role::create(['name' => 'manager', 'slug'=> 'manager', 'permissions' => [
@@ -166,11 +167,13 @@ class TestCase extends \Orchestra\Testbench\TestCase
         ], 'access_level' => 3, 'is_default' => null]);
         Role::create(['name' => 'registered', 'slug'=> 'registered', 'permissions' => [], 'access_level' => 3, 'is_default' => 1]);
 
+        // create test users and assign roles
         User::create(['name' => 'Superman', 'email' => 'superuser@example.com'])->roles()->attach(1);
         User::create(['name' => 'Admin', 'email' => 'admin@example.com'])->roles()->attach(2);
         User::create(['name' => 'Manager', 'email' => 'manager@example.com'])->roles()->attach(3);
         User::create(['name' => 'Registered User', 'email' => 'registered@example.com'])->roles()->attach(4);
 
+        // register default permissions for testing
         PermissionRegistrar::register([
             'users.create',
             'users.view',

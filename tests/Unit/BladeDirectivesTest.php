@@ -11,11 +11,11 @@ class BladeDirectivesTest extends TestCase
 
     public function test_may()
     {
-        $string = '@may("users.crete")
+        $string = '@may("users.create")
 Have access
 @endmay';
 
-        $expected = '<?php if(acl()->may("users.crete")): ?>
+        $expected = '<?php if(may("users.create")): ?>
 Have access
 <?php endif; ?>';
 
@@ -24,12 +24,25 @@ Have access
 
     public function test_maynot()
     {
-        $string = '@maynot("users.crete")
+        $string = '@maynot("users.create")
 Dont have access
 @endmaynot';
 
-        $expected = '<?php if(acl()->maynot("users.crete")): ?>
+        $expected = '<?php if(maynot("users.create")): ?>
 Dont have access
+<?php endif; ?>';
+
+        $this->assertEquals($expected, $this->compileBlade($string));
+    }
+
+    public function test_mayall()
+    {
+        $string = '@mayall(["users.create", "users.update"])
+Have access
+@endmayall';
+
+        $expected = '<?php if(mayall(["users.create", "users.update"])): ?>
+Have access
 <?php endif; ?>';
 
         $this->assertEquals($expected, $this->compileBlade($string));
@@ -41,7 +54,7 @@ Dont have access
 I am manager
 @endhasrole';
 
-        $expected = '<?php if(acl()->userHasRole("manager")): ?>
+        $expected = '<?php if(has_role("manager")): ?>
 I am manager
 <?php endif; ?>';
 
