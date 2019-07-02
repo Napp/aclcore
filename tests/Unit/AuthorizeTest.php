@@ -56,6 +56,4 @@ class AuthorizeTest extends TestCase
             return $e->getResponseCode();
         }
     }
-
-
 }

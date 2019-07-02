@@ -8,7 +8,8 @@ trait RendersBlade
      * Compile blade markup into PHP code.
      *
      * @param string $viewContent blade markup
-     * @param array $viewData
+     * @param array  $viewData
+     *
      * @return string
      */
     protected function compileBlade($viewContent, $viewData = [])
@@ -31,6 +32,7 @@ trait RendersBlade
      * in generated PHP code.
      *
      * @param mixed $value
+     *
      * @return string
      */
     protected function stringify($value)
@@ -52,6 +54,7 @@ trait RendersBlade
      * Execute PHP code and return the output.
      *
      * @param string $phpCode
+     *
      * @return string
      */
     protected function getCodeOutput($phpCode)
@@ -75,7 +78,8 @@ trait RendersBlade
      * Output is trimmed.
      *
      * @param string $viewContent blade markup
-     * @param array $viewData
+     * @param array  $viewData
+     *
      * @return string
      */
     protected function renderBlade($viewContent, $viewData = [])

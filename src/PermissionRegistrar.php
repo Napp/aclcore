@@ -21,9 +21,10 @@ class PermissionRegistrar
     /**
      * @codeCoverageIgnore
      * Singleton class instance.
+     *
      * @return PermissionRegistrar
      */
-    public static function getInstance(): PermissionRegistrar
+    public static function getInstance(): self
     {
         if (!null === self::$instance) {
             self::$instance = new self();
@@ -33,9 +34,10 @@ class PermissionRegistrar
     }
 
     /**
-     * Registers permissions
+     * Registers permissions.
      *
      * @param array $permissions
+     *
      * @return void
      */
     public static function register(array $permissions): void
@@ -57,6 +59,7 @@ class PermissionRegistrar
 
     /**
      * @param array $permissions
+     *
      * @return array
      */
     protected static function format(array $permissions): array
@@ -72,8 +75,10 @@ class PermissionRegistrar
     }
 
     /**
-     * Replace user permission with PermissionRegistrar
+     * Replace user permission with PermissionRegistrar.
+     *
      * @param array $userPermissions
+     *
      * @return array
      */
     public static function formatPermissions(array $userPermissions): array

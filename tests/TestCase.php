@@ -22,7 +22,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
     protected $registeredUser;
 
     /**
-     * Set up the test
+     * Set up the test.
      */
     public function setUp()
     {
@@ -38,11 +38,10 @@ class TestCase extends \Orchestra\Testbench\TestCase
 
     public function setUpTestDatabases()
     {
-
         if (false === static::$migrated) {
             $this->dropAllTables();
 
-            $this->migrateTables(__DIR__ . '/../database/migrations');
+            $this->migrateTables(__DIR__.'/../database/migrations');
 
             $this->seedData();
 
@@ -60,14 +59,14 @@ class TestCase extends \Orchestra\Testbench\TestCase
     protected function getPackageProviders($app)
     {
         return [
-            AclServiceProvider::class
+            AclServiceProvider::class,
         ];
     }
 
     /**
      * Define environment setup.
      *
-     * @param  \Illuminate\Foundation\Application   $app
+     * @param \Illuminate\Foundation\Application $app
      *
      * @return void
      */
@@ -82,32 +81,31 @@ class TestCase extends \Orchestra\Testbench\TestCase
                 'user' => \Illuminate\Foundation\Auth\User::class,
             ],
             'table_names' => [
-                'roles' => 'roles',
+                'roles'       => 'roles',
                 'users_roles' => 'users_roles',
             ],
-            'guard' => 'web'
+            'guard' => 'web',
         ]);
 
         // MySQL
         $app['config']->set('database.connections.test', [
-            'driver' => 'mysql',
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'db_testing'),
-            'username' => env('DB_USERNAME', 'root'),
-            'password' => env('DB_PASSWORD', ''),
+            'driver'      => 'mysql',
+            'host'        => env('DB_HOST', '127.0.0.1'),
+            'port'        => env('DB_PORT', '3306'),
+            'database'    => env('DB_DATABASE', 'db_testing'),
+            'username'    => env('DB_USERNAME', 'root'),
+            'password'    => env('DB_PASSWORD', ''),
             'unix_socket' => env('DB_SOCKET', ''),
-            'charset' => 'utf8mb4',
-            'collation' => 'utf8mb4_unicode_ci',
-            'prefix' => '',
-            'strict' => true,
-            'engine' => null,
+            'charset'     => 'utf8mb4',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'prefix'      => '',
+            'strict'      => true,
+            'engine'      => null,
         ]);
-
     }
 
     /**
-     * Drop all tables to start the test with fresh data
+     * Drop all tables to start the test with fresh data.
      */
     public function dropAllTables()
     {
@@ -123,7 +121,8 @@ class TestCase extends \Orchestra\Testbench\TestCase
     }
 
     /**
-     * Migrate the database
+     * Migrate the database.
+     *
      * @param $paths
      */
     public function migrateTables($paths)
@@ -163,7 +162,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
             'users.update',
             'users.foo',
             'users.bar',
-            'users.exception'
+            'users.exception',
         ], 'access_level' => 3, 'is_default' => null]);
         Role::create(['name' => 'registered', 'slug'=> 'registered', 'permissions' => [], 'access_level' => 3, 'is_default' => 1]);
 
@@ -179,8 +178,8 @@ class TestCase extends \Orchestra\Testbench\TestCase
             'users.view',
             'users.update',
             'users.destroy',
-            'users.foo' => 'Napp\Core\Acl\Tests\Stubs\UserPermissions@foo',
-            'users.bar' => 'Napp\Core\Acl\Tests\Stubs\UserPermissions@bar',
+            'users.foo'       => 'Napp\Core\Acl\Tests\Stubs\UserPermissions@foo',
+            'users.bar'       => 'Napp\Core\Acl\Tests\Stubs\UserPermissions@bar',
             'users.exception' => 'Napp\Core\Acl\Tests\Stubs\UserPermissions@exception',
         ]);
     }

@@ -5,8 +5,7 @@ namespace Napp\Core\Acl\Contract;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
- * Interface Role
- * @package Napp\Core\Acl\Contract
+ * Interface Role.
  */
 interface Role
 {
@@ -16,8 +15,9 @@ interface Role
     public function roles(): BelongsToMany;
 
     /**
-     * @return bool
      * @throws \Exception
+     *
+     * @return bool
      */
     public function delete();
 

@@ -6,8 +6,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
- * Trait HasRole
- * @package Napp\Core\Acl\Role
+ * Trait HasRole.
  */
 trait HasRole
 {
@@ -20,8 +19,9 @@ trait HasRole
     }
 
     /**
-     * @return bool
      * @throws \Exception
+     *
+     * @return bool
      */
     public function delete()
     {
@@ -122,6 +122,7 @@ trait HasRole
      * @param int $level
      * @param int $parent
      * @param int $current
+     *
      * @return int
      */
     protected function getLowestAccessLevel($level, $parent, $current): int
