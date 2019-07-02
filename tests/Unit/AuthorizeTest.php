@@ -18,7 +18,7 @@ class AuthorizeTest extends TestCase
     protected $acl;
     protected $authMiddleware;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
