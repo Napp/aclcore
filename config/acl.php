@@ -1,7 +1,7 @@
 <?php
 
 return [
-    /**
+    /*
      * Define which Eloquent models used by the package
      */
     'models' => [
@@ -9,16 +9,16 @@ return [
         'user' => Illuminate\Foundation\Auth\User::class,
     ],
 
-    /**
+    /*
      * Table names for the package
      */
     'table_names' => [
-        'roles' => 'roles',
+        'roles'       => 'roles',
         'users_roles' => 'users_roles',
     ],
 
-    /**
+    /*
      * The default guard used to authorize users
      */
-    'guard' => 'web'
+    'guard' => 'web',
 ];

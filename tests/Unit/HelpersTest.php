@@ -2,16 +2,8 @@
 
 namespace Napp\Core\Acl\Tests\Unit;
 
-use Illuminate\Auth\AuthenticationException;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Napp\Core\Acl\AclService;
-use Napp\Core\Acl\Middleware\Authorize;
-use Napp\Core\Acl\Model\Role;
-use Napp\Core\Acl\PermissionRegistrar;
-use Napp\Core\Acl\Tests\Stubs\User;
 use Napp\Core\Acl\Tests\TestCase;
-use Napp\Core\Api\Exceptions\Exceptions\AuthorizationException;
 
 class HelpersTest extends TestCase
 {
@@ -70,7 +62,4 @@ class HelpersTest extends TestCase
         $this->assertTrue(has_role($this->managerUser, 'manager'));
         $this->assertFalse(has_role($this->adminUser, 'manager'));
     }
-
-
-
 }

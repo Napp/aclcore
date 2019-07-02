@@ -3,11 +3,8 @@
 namespace Napp\Core\Acl\Tests\Unit;
 
 use Napp\Core\Acl\AclService;
-use Napp\Core\Acl\Model\Role;
 use Napp\Core\Acl\PermissionRegistrar;
-use Napp\Core\Acl\Tests\Stubs\User;
 use Napp\Core\Acl\Tests\TestCase;
-use PHPUnit\Framework\MockObject\MockBuilder;
 
 class PermissionsTest extends TestCase
 {
@@ -25,8 +22,8 @@ class PermissionsTest extends TestCase
             'users.view',
             'users.update',
             'users.destroy',
-            'users.foo' => 'Napp\Core\Acl\Tests\Stubs\UserPermissions@foo',
-            'users.bar' => 'Napp\Core\Acl\Tests\Stubs\UserPermissions@bar',
+            'users.foo'       => 'Napp\Core\Acl\Tests\Stubs\UserPermissions@foo',
+            'users.bar'       => 'Napp\Core\Acl\Tests\Stubs\UserPermissions@bar',
             'users.exception' => 'Napp\Core\Acl\Tests\Stubs\UserPermissions@exception',
         ]);
         $this->acl = new AclService();
@@ -149,12 +146,10 @@ class PermissionsTest extends TestCase
     public function test_context_mock()
     {
         $mock = $this->getMockBuilder(\Napp\Common\Context\Context::class)
-            ->setMethods(array('getCMSUser'))->getMock();
+            ->setMethods(['getCMSUser'])->getMock();
         app()->instance(\Napp\Common\Context\Context::class, $mock);
 
         $this->actingAs($this->registeredUser);
         $this->assertEmpty($this->acl->getUserPermissions(null));
     }
-
-
 }

@@ -10,20 +10,20 @@ class PermissionRegistrarTest extends TestCase
     public function test_it_can_register_permissions()
     {
         $expected = [
-            'users.create' => 'users.create',
-            'users.view' => 'users.view',
-            'users.update' => 'users.update',
-            'users.destroy' => 'users.destroy',
-            'users.foo' => 'Napp\Core\Acl\Tests\Stubs\UserPermissions@foo',
-            'users.bar' => 'Napp\Core\Acl\Tests\Stubs\UserPermissions@bar',
+            'users.create'    => 'users.create',
+            'users.view'      => 'users.view',
+            'users.update'    => 'users.update',
+            'users.destroy'   => 'users.destroy',
+            'users.foo'       => 'Napp\Core\Acl\Tests\Stubs\UserPermissions@foo',
+            'users.bar'       => 'Napp\Core\Acl\Tests\Stubs\UserPermissions@bar',
             'users.exception' => 'Napp\Core\Acl\Tests\Stubs\UserPermissions@exception',
-            'foo.bar' => 'foo.bar',
-            'woo.hoo' => 'woo.hoo',
+            'foo.bar'         => 'foo.bar',
+            'woo.hoo'         => 'woo.hoo',
         ];
 
         PermissionRegistrar::register([
             'foo.bar',
-            'woo.hoo'
+            'woo.hoo',
         ]);
 
         $this->assertEquals($expected, PermissionRegistrar::getPermissions());
@@ -32,28 +32,28 @@ class PermissionRegistrarTest extends TestCase
     public function test_it_can_register_permissions_multiple_times()
     {
         $expected = [
-            'users.create' => 'users.create',
-            'users.view' => 'users.view',
-            'users.update' => 'users.update',
-            'users.destroy' => 'users.destroy',
-            'users.foo' => 'Napp\Core\Acl\Tests\Stubs\UserPermissions@foo',
-            'users.bar' => 'Napp\Core\Acl\Tests\Stubs\UserPermissions@bar',
+            'users.create'    => 'users.create',
+            'users.view'      => 'users.view',
+            'users.update'    => 'users.update',
+            'users.destroy'   => 'users.destroy',
+            'users.foo'       => 'Napp\Core\Acl\Tests\Stubs\UserPermissions@foo',
+            'users.bar'       => 'Napp\Core\Acl\Tests\Stubs\UserPermissions@bar',
             'users.exception' => 'Napp\Core\Acl\Tests\Stubs\UserPermissions@exception',
-            'foo.bar' => 'foo.bar',
-            'woo.hoo' => 'woo.hoo',
-            'foo.bar2' => 'foo.bar2',
-            'wow.awesome' => 'wow.awesome',
+            'foo.bar'         => 'foo.bar',
+            'woo.hoo'         => 'woo.hoo',
+            'foo.bar2'        => 'foo.bar2',
+            'wow.awesome'     => 'wow.awesome',
         ];
 
         PermissionRegistrar::register([
             'foo.bar',
-            'woo.hoo'
+            'woo.hoo',
         ]);
 
         PermissionRegistrar::register([
             'foo.bar2',
             'foo.bar', //duplicate
-            'wow.awesome'
+            'wow.awesome',
         ]);
 
         $this->assertEquals($expected, PermissionRegistrar::getPermissions());
@@ -62,7 +62,7 @@ class PermissionRegistrarTest extends TestCase
     public function test_it_can_format_user_permissions()
     {
         $userPermissions = [
-            'foo.bar'
+            'foo.bar',
         ];
 
         $expected = [
@@ -72,7 +72,7 @@ class PermissionRegistrarTest extends TestCase
         PermissionRegistrar::register([
             'foo.bar' => 'SomeClassClosure@create',
             'woo.hoo',
-            'extra.perm'
+            'extra.perm',
         ]);
 
         $this->assertEquals($expected, PermissionRegistrar::formatPermissions($userPermissions));
@@ -81,7 +81,7 @@ class PermissionRegistrarTest extends TestCase
     public function test_it_can_format_user_permissions_2()
     {
         $userPermissions = [
-            'extra.perm'
+            'extra.perm',
         ];
 
         $expected = [
@@ -91,7 +91,7 @@ class PermissionRegistrarTest extends TestCase
         PermissionRegistrar::register([
             'foo.bar' => 'SomeClassClosure@create',
             'woo.hoo',
-            'extra.perm'
+            'extra.perm',
         ]);
 
         $this->assertEquals($expected, PermissionRegistrar::formatPermissions($userPermissions));

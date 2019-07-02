@@ -2,7 +2,6 @@
 
 namespace Napp\Core\Acl\Tests\Unit;
 
-use Illuminate\Support\Collection;
 use Napp\Core\Acl\AclService;
 use Napp\Core\Acl\Model\Role;
 use Napp\Core\Acl\Tests\Stubs\User;
@@ -28,7 +27,6 @@ class RolesTest extends TestCase
         $this->assertFalse($this->service->userHasRole($this->superUser, 'manager'));
     }
 
-
     public function test_user_has_admin_role()
     {
         $this->assertTrue($this->service->userHasRole($this->adminUser, 'admin'));
@@ -46,9 +44,9 @@ class RolesTest extends TestCase
     public function test_user_has_many_roles()
     {
         $user = User::create(['name' => 'User with many roles', 'email' => 'many@example.com']);
-        $user->roles()->attach([2,3,4]);
+        $user->roles()->attach([2, 3, 4]);
 
-        $this->assertEquals([2,3,4], $user->getRoleIds());
+        $this->assertEquals([2, 3, 4], $user->getRoleIds());
         $this->assertTrue($user->isAdmin());
         $this->assertFalse($user->isSuperUser());
         $this->assertEquals(2, $user->getAccessLevels());
@@ -57,12 +55,12 @@ class RolesTest extends TestCase
         $this->assertTrue($this->service->userHasRole($user, 'admin'));
         $this->assertTrue($this->service->userHasRole($user, 'manager'));
         $this->assertTrue($this->service->userHasRole($user, 'registered'));
-        $this->assertTrue($this->service->userHasRole($user, ['manager','registered']));
+        $this->assertTrue($this->service->userHasRole($user, ['manager', 'registered']));
     }
 
     public function test_user_has_no_roles()
     {
-        $this->assertFalse($this->service->userHasRole($this->managerUser, ['foo','bar']));
+        $this->assertFalse($this->service->userHasRole($this->managerUser, ['foo', 'bar']));
     }
 
     public function test_null_user_has_no_roles()
@@ -75,7 +73,7 @@ class RolesTest extends TestCase
         $this->actingAs($this->adminUser);
 
         $user = User::create(['name' => 'new User', 'email' => 'newuser@example.com']);
-        $user->roles()->attach([3,4]);
+        $user->roles()->attach([3, 4]);
         $userId = $user->getKey();
         $this->assertDatabaseHas('users_roles', ['user_id' => $userId]);
 

@@ -5,8 +5,7 @@ namespace Napp\Core\Acl\Model;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Role
- * @package Napp\Core\Acl\Model
+ * Class Role.
  */
 class Role extends Model
 {
@@ -30,7 +29,7 @@ class Role extends Model
         'permissions',
         'slug',
         'access_level',
-        'access_level_parent'
+        'access_level_parent',
     ];
 
     /**
@@ -42,8 +41,9 @@ class Role extends Model
     }
 
     /**
-     * @return bool
      * @throws \Exception
+     *
+     * @return bool
      */
     public function delete()
     {
@@ -62,8 +62,10 @@ class Role extends Model
 
     /**
      * @param null|array $permissions
-     * @return void
+     *
      * @throws \InvalidArgumentException
+     *
+     * @return void
      */
     public function setPermissionsAttribute(?array $permissions)
     {

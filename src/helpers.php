@@ -1,4 +1,5 @@
 <?php
+
 if (!function_exists('acl')) {
     /**
      * @return \Napp\Core\Acl\AclService
@@ -32,6 +33,7 @@ if (!function_exists('may')) {
 if (!function_exists('maynot')) {
     /**
      * @param string|array $permission
+     *
      * @return \Napp\Core\Acl\AclService
      */
     function maynot($permission)
@@ -43,6 +45,7 @@ if (!function_exists('maynot')) {
 if (!function_exists('mayall')) {
     /**
      * @param array $permissions
+     *
      * @return \Napp\Core\Acl\AclService
      */
     function mayall(array $permissions)
@@ -54,7 +57,8 @@ if (!function_exists('mayall')) {
 if (!function_exists('has_role')) {
     /**
      * @param \Napp\Core\Acl\Contract\Role|null $user
-     * @param array|string $roles
+     * @param array|string                      $roles
+     *
      * @return \Napp\Core\Acl\AclService
      */
     function has_role($user, $roles)

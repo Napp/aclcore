@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Napp\Core\Acl;
 
@@ -6,8 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Compilers\BladeCompiler;
 
 /**
- * Class AclServiceProvider
- * @package Napp\Core\Acl
+ * Class AclServiceProvider.
  */
 class AclServiceProvider extends ServiceProvider
 {
@@ -20,6 +19,7 @@ class AclServiceProvider extends ServiceProvider
 
         $this->registerBladeDirectives();
     }
+
     /**
      * Perform post-registration booting of services.
      *
@@ -27,8 +27,8 @@ class AclServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->publishes([__DIR__ . '/../database/migrations' => base_path('database/migrations')], 'migrations');
-        $this->publishes([__DIR__ . '/../config/acl.php' => config_path('acl.php')], 'config');
+        $this->publishes([__DIR__.'/../database/migrations' => base_path('database/migrations')], 'migrations');
+        $this->publishes([__DIR__.'/../config/acl.php' => config_path('acl.php')], 'config');
     }
 
     /**

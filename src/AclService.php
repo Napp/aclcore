@@ -6,14 +6,14 @@ use Illuminate\Container\Container;
 use Napp\Core\Acl\Contract\Role;
 
 /**
- * Class AclService
- * @package Napp\Core\Acl
+ * Class AclService.
  */
 class AclService implements AclServiceInterface
 {
     /**
      * @param \Napp\Core\Acl\Contract\Role|null $user
-     * @param array|string $roles
+     * @param array|string                      $roles
+     *
      * @return bool
      */
     public function userHasRole(?Role $user, $roles): bool
@@ -36,8 +36,9 @@ class AclService implements AclServiceInterface
     }
 
     /**
-     * @param string $permission
+     * @param string                            $permission
      * @param \Napp\Core\Acl\Contract\Role|null $user
+     *
      * @return bool
      */
     public function hasPermission(string $permission, ?Role $user = null): bool
@@ -70,8 +71,9 @@ class AclService implements AclServiceInterface
     }
 
     /**
-     * @param array $permissions
+     * @param array                             $permissions
      * @param \Napp\Core\Acl\Contract\Role|null $user
+     *
      * @return bool
      */
     public function hasAnyPermission(array $permissions, ?Role $user = null): bool
@@ -87,8 +89,9 @@ class AclService implements AclServiceInterface
     }
 
     /**
-     * @param array $permissions
+     * @param array                             $permissions
      * @param \Napp\Core\Acl\Contract\Role|null $user
+     *
      * @return bool
      */
     public function hasAllPermissions(array $permissions, ?Role $user = null): bool
@@ -113,6 +116,7 @@ class AclService implements AclServiceInterface
 
     /**
      * @param \Napp\Core\Acl\Contract\Role|null $user
+     *
      * @return array
      */
     public function getUserPermissions(?Role $user = null): array
@@ -139,6 +143,7 @@ class AclService implements AclServiceInterface
 
     /**
      * @param string|array $permission
+     *
      * @return bool
      */
     public function may($permission): bool
@@ -154,6 +159,7 @@ class AclService implements AclServiceInterface
 
     /**
      * @param string|array $permission
+     *
      * @return bool
      */
     public function maynot($permission): bool
@@ -163,6 +169,7 @@ class AclService implements AclServiceInterface
 
     /**
      * @param array $permissions
+     *
      * @return bool
      */
     public function mayall(array $permissions): bool

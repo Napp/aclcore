@@ -60,5 +60,4 @@ I am manager
 
         $this->assertEquals($expected, $this->compileBlade($string));
     }
-
 }
