@@ -30,10 +30,10 @@
   "require": {
     "php" : ">=7.1",
     "ext-json": "*",
-    "illuminate/auth": "~5.6.0|~5.7.0|~5.8.0|^6.0",
-    "illuminate/database": "~5.6.0|~5.7.0|~5.8.0|^6.0",
-    "illuminate/support": "~5.6.0|~5.7.0|~5.8.0|^6.0",
-    "illuminate/view": "~5.6.0|~5.7.0|~5.8.0|^6.0",
+    "illuminate/auth": "~5.6.0|~5.7.0|~5.8.0|^6.0|^7.0",
+    "illuminate/database": "~5.6.0|~5.7.0|~5.8.0|^6.0|^7.0",
+    "illuminate/support": "~5.6.0|~5.7.0|~5.8.0|^6.0|^7.0",
+    "illuminate/view": "~5.6.0|~5.7.0|~5.8.0|^6.0|^7.0",
     "napp/apicore": "^1.0"
   },
   "require-dev": {
