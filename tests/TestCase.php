@@ -2,60 +2,26 @@
 
 namespace Napp\Core\Acl\Tests;
 
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use Napp\Core\Acl\AclServiceProvider;
 use Napp\Core\Acl\Model\Role;
 use Napp\Core\Acl\PermissionRegistrar;
 use Napp\Core\Acl\Tests\Stubs\User;
-use Orchestra\Testbench\Database\MigrateProcessor;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {
-    public static $migrated = false;
-
     // User Types
     protected $superUser;
     protected $adminUser;
     protected $managerUser;
     protected $registeredUser;
 
-    /**
-     * Set up the test.
-     */
     public function setUp(): void
     {
         parent::setUp();
 
         $this->setUpTestDatabases();
-
-        $this->superUser = User::with('roles')->where('email', 'superuser@example.com')->first();
-        $this->adminUser = User::with('roles')->where('email', 'admin@example.com')->first();
-        $this->managerUser = User::with('roles')->where('email', 'manager@example.com')->first();
-        $this->registeredUser = User::with('roles')->where('email', 'registered@example.com')->first();
     }
 
-    public function setUpTestDatabases()
-    {
-        if (false === static::$migrated) {
-            $this->dropAllTables();
-
-            $this->migrateTables(__DIR__.'/../database/migrations');
-
-            $this->seedData();
-
-            static::$migrated = true;
-        }
-
-        $this->beginDatabaseTransaction();
-    }
-
-    /**
-     * @param \Illuminate\Foundation\Application $app
-     *
-     * @return array
-     */
     protected function getPackageProviders($app)
     {
         return [
@@ -63,18 +29,10 @@ class TestCase extends \Orchestra\Testbench\TestCase
         ];
     }
 
-    /**
-     * Define environment setup.
-     *
-     * @param \Illuminate\Foundation\Application $app
-     *
-     * @return void
-     */
-    protected function getEnvironmentSetUp($app)
+    public function getEnvironmentSetUp($app)
     {
-        $app['config']->set('cache.default', 'array');
-        $app['config']->set('database.default', 'sqlite');
-        $app['config']->set('database.connections.sqlite', [
+        $app['config']->set('database.default', 'testing');
+        $app['config']->set('database.connections.testing', [
             'driver' => 'sqlite',
             'database' => ':memory:',
             'prefix' => '',
@@ -91,69 +49,19 @@ class TestCase extends \Orchestra\Testbench\TestCase
             ],
             'guard' => 'web',
         ]);
-
-        // MySQL
-        $app['config']->set('database.connections.test', [
-            'driver' => 'mysql',
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '33306'),
-            'database' => env('DB_DATABASE', 'db_test'),
-            'username' => env('DB_USERNAME', 'root'),
-            'password' => env('DB_PASSWORD', 'somepassword123'),
-            'unix_socket' => env('DB_SOCKET', ''),
-            'charset' => 'utf8mb4',
-            'collation' => 'utf8mb4_unicode_ci',
-            'prefix' => '',
-            'strict' => true,
-            'engine' => null,
-        ]);
     }
 
-    /**
-     * Drop all tables to start the test with fresh data.
-     */
-    public function dropAllTables()
+    public function setUpTestDatabases()
     {
-        Schema::disableForeignKeyConstraints();
-        collect(DB::select('SHOW TABLES'))
-            ->map(function (\stdClass $tableProperties) {
-                return get_object_vars($tableProperties)[key($tableProperties)];
-            })
-            ->each(function (string $tableName) {
-                Schema::drop($tableName);
-            });
-        Schema::enableForeignKeyConstraints();
-    }
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/database');
 
-    /**
-     * Migrate the database.
-     *
-     * @param $paths
-     */
-    public function migrateTables($paths)
-    {
-        $options = is_array($paths) ? $paths : ['--path' => $paths];
+        $this->seedData();
 
-        if (isset($options['--realpath']) && is_string($options['--realpath'])) {
-            $options['--path'] = [$options['--realpath']];
-        }
-
-        $options['--realpath'] = true;
-
-        $this->createTestUserTable();
-
-        $migrator = new MigrateProcessor($this, $options);
-        $migrator->up();
-    }
-
-    private function createTestUserTable()
-    {
-        // hard code a test user database sense the migrate command can only take one migration path at the same time.
-        $this->app['db']->connection()->getSchemaBuilder()->create('users', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('email')->nullable();
-        });
+        $this->superUser = User::with('roles')->where('email', 'superuser@example.com')->first();
+        $this->adminUser = User::with('roles')->where('email', 'admin@example.com')->first();
+        $this->managerUser = User::with('roles')->where('email', 'manager@example.com')->first();
+        $this->registeredUser = User::with('roles')->where('email', 'registered@example.com')->first();
     }
 
     private function seedData()
@@ -187,32 +95,5 @@ class TestCase extends \Orchestra\Testbench\TestCase
             'users.bar' => 'Napp\Core\Acl\Tests\Stubs\UserPermissions@bar',
             'users.exception' => 'Napp\Core\Acl\Tests\Stubs\UserPermissions@exception',
         ]);
-    }
-
-    /**
-     * Begin a database transaction on the testing database.
-     *
-     * @return void
-     */
-    public function beginDatabaseTransaction()
-    {
-        $database = $this->app->make('db');
-
-        $connection = $database->connection(null);
-        $dispatcher = $connection->getEventDispatcher();
-
-        $connection->unsetEventDispatcher();
-        $connection->beginTransaction();
-        $connection->setEventDispatcher($dispatcher);
-
-        $this->beforeApplicationDestroyed(function () use ($database) {
-            $connection = $database->connection(null);
-            $dispatcher = $connection->getEventDispatcher();
-
-            $connection->unsetEventDispatcher();
-            $connection->rollback();
-            $connection->setEventDispatcher($dispatcher);
-            $connection->disconnect();
-        });
     }
 }

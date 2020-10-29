@@ -5,14 +5,6 @@ on: [push, pull_request]
 jobs:
   test:
     runs-on: ${{ matrix.os }}
-    services:
-      mysql-service:
-        image: mysql:5.7
-        env:
-          MYSQL_ROOT_PASSWORD: somepassword123
-          MYSQL_DATABASE: db_test
-        ports:
-          - 33306:3306
     strategy:
       fail-fast: true
       matrix:
@@ -41,18 +33,16 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
-          coverage: none
+          coverage: "pcov"
 
       - name: Install dependencies
         run: |
-          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
-          composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
+          composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction
 
       - name: Execute tests
+        run: vendor/bin/phpunit --coverage-clover=clover.xml
+
+      - name: Send code coverage to codecov
         env:
-          DB_CONNECTION: mysql
-          DB_DATABASE: db_test
-          DB_PORT: 33306
-          DB_USER: root
-          DB_PASSWORD: somepassword123
-        run: vendor/bin/phpunit
+          CODECOV_TOKEN: 50e9cde6-71a2-4b45-9989-651325074549
+        run: bash <(curl -s https://codecov.io/bash)
