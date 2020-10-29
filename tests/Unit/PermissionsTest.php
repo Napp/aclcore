@@ -22,8 +22,8 @@ class PermissionsTest extends TestCase
             'users.view',
             'users.update',
             'users.destroy',
-            'users.foo'       => 'Napp\Core\Acl\Tests\Stubs\UserPermissions@foo',
-            'users.bar'       => 'Napp\Core\Acl\Tests\Stubs\UserPermissions@bar',
+            'users.foo' => 'Napp\Core\Acl\Tests\Stubs\UserPermissions@foo',
+            'users.bar' => 'Napp\Core\Acl\Tests\Stubs\UserPermissions@bar',
             'users.exception' => 'Napp\Core\Acl\Tests\Stubs\UserPermissions@exception',
         ]);
         $this->acl = new AclService();

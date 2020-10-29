@@ -86,7 +86,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
                 'user' => \Illuminate\Foundation\Auth\User::class,
             ],
             'table_names' => [
-                'roles'       => 'roles',
+                'roles' => 'roles',
                 'users_roles' => 'users_roles',
             ],
             'guard' => 'web',
@@ -94,18 +94,18 @@ class TestCase extends \Orchestra\Testbench\TestCase
 
         // MySQL
         $app['config']->set('database.connections.test', [
-            'driver'      => 'mysql',
-            'host'        => env('DB_HOST', '127.0.0.1'),
-            'port'        => env('DB_PORT', '33306'),
-            'database'    => env('DB_DATABASE', 'db_test'),
-            'username'    => env('DB_USERNAME', 'root'),
-            'password'    => env('DB_PASSWORD', 'somepassword123'),
+            'driver' => 'mysql',
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'port' => env('DB_PORT', '33306'),
+            'database' => env('DB_DATABASE', 'db_test'),
+            'username' => env('DB_USERNAME', 'root'),
+            'password' => env('DB_PASSWORD', 'somepassword123'),
             'unix_socket' => env('DB_SOCKET', ''),
-            'charset'     => 'utf8mb4',
-            'collation'   => 'utf8mb4_unicode_ci',
-            'prefix'      => '',
-            'strict'      => true,
-            'engine'      => null,
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
         ]);
     }
 
@@ -159,9 +159,9 @@ class TestCase extends \Orchestra\Testbench\TestCase
     private function seedData()
     {
         // create test roles
-        Role::create(['name' => 'superuser', 'slug'=> 'superuser', 'permissions' => null, 'access_level' => 1, 'is_default' => null]);
-        Role::create(['name' => 'admin', 'slug'=> 'admin', 'permissions' => null, 'access_level' => 2, 'is_default' => null]);
-        Role::create(['name' => 'manager', 'slug'=> 'manager', 'permissions' => [
+        Role::create(['name' => 'superuser', 'slug' => 'superuser', 'permissions' => null, 'access_level' => 1, 'is_default' => null]);
+        Role::create(['name' => 'admin', 'slug' => 'admin', 'permissions' => null, 'access_level' => 2, 'is_default' => null]);
+        Role::create(['name' => 'manager', 'slug' => 'manager', 'permissions' => [
             'users.view',
             'users.create',
             'users.update',
@@ -169,7 +169,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
             'users.bar',
             'users.exception',
         ], 'access_level' => 3, 'is_default' => null]);
-        Role::create(['name' => 'registered', 'slug'=> 'registered', 'permissions' => [], 'access_level' => 3, 'is_default' => 1]);
+        Role::create(['name' => 'registered', 'slug' => 'registered', 'permissions' => [], 'access_level' => 3, 'is_default' => 1]);
 
         // create test users and assign roles
         User::create(['name' => 'Superman', 'email' => 'superuser@example.com'])->roles()->attach(1);
@@ -183,8 +183,8 @@ class TestCase extends \Orchestra\Testbench\TestCase
             'users.view',
             'users.update',
             'users.destroy',
-            'users.foo'       => 'Napp\Core\Acl\Tests\Stubs\UserPermissions@foo',
-            'users.bar'       => 'Napp\Core\Acl\Tests\Stubs\UserPermissions@bar',
+            'users.foo' => 'Napp\Core\Acl\Tests\Stubs\UserPermissions@foo',
+            'users.bar' => 'Napp\Core\Acl\Tests\Stubs\UserPermissions@bar',
             'users.exception' => 'Napp\Core\Acl\Tests\Stubs\UserPermissions@exception',
         ]);
     }

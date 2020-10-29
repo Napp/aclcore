@@ -164,7 +164,7 @@ class AclService implements AclServiceInterface
      */
     public function maynot($permission): bool
     {
-        return !$this->may($permission);
+        return ! $this->may($permission);
     }
 
     /**

@@ -10,15 +10,15 @@ class PermissionRegistrarTest extends TestCase
     public function test_it_can_register_permissions()
     {
         $expected = [
-            'users.create'    => 'users.create',
-            'users.view'      => 'users.view',
-            'users.update'    => 'users.update',
-            'users.destroy'   => 'users.destroy',
-            'users.foo'       => 'Napp\Core\Acl\Tests\Stubs\UserPermissions@foo',
-            'users.bar'       => 'Napp\Core\Acl\Tests\Stubs\UserPermissions@bar',
+            'users.create' => 'users.create',
+            'users.view' => 'users.view',
+            'users.update' => 'users.update',
+            'users.destroy' => 'users.destroy',
+            'users.foo' => 'Napp\Core\Acl\Tests\Stubs\UserPermissions@foo',
+            'users.bar' => 'Napp\Core\Acl\Tests\Stubs\UserPermissions@bar',
             'users.exception' => 'Napp\Core\Acl\Tests\Stubs\UserPermissions@exception',
-            'foo.bar'         => 'foo.bar',
-            'woo.hoo'         => 'woo.hoo',
+            'foo.bar' => 'foo.bar',
+            'woo.hoo' => 'woo.hoo',
         ];
 
         PermissionRegistrar::register([
@@ -32,17 +32,17 @@ class PermissionRegistrarTest extends TestCase
     public function test_it_can_register_permissions_multiple_times()
     {
         $expected = [
-            'users.create'    => 'users.create',
-            'users.view'      => 'users.view',
-            'users.update'    => 'users.update',
-            'users.destroy'   => 'users.destroy',
-            'users.foo'       => 'Napp\Core\Acl\Tests\Stubs\UserPermissions@foo',
-            'users.bar'       => 'Napp\Core\Acl\Tests\Stubs\UserPermissions@bar',
+            'users.create' => 'users.create',
+            'users.view' => 'users.view',
+            'users.update' => 'users.update',
+            'users.destroy' => 'users.destroy',
+            'users.foo' => 'Napp\Core\Acl\Tests\Stubs\UserPermissions@foo',
+            'users.bar' => 'Napp\Core\Acl\Tests\Stubs\UserPermissions@bar',
             'users.exception' => 'Napp\Core\Acl\Tests\Stubs\UserPermissions@exception',
-            'foo.bar'         => 'foo.bar',
-            'woo.hoo'         => 'woo.hoo',
-            'foo.bar2'        => 'foo.bar2',
-            'wow.awesome'     => 'wow.awesome',
+            'foo.bar' => 'foo.bar',
+            'woo.hoo' => 'woo.hoo',
+            'foo.bar2' => 'foo.bar2',
+            'wow.awesome' => 'wow.awesome',
         ];
 
         PermissionRegistrar::register([
