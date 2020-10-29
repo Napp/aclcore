@@ -8,3 +8,4 @@ coverage
 coverage.xml
 composer.lock
 phpunit.local.xml
+.phpunit.result.cache
