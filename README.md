@@ -1,10 +1,10 @@
 # Napp ACL Core
 
-[![Build Status](https://travis-ci.org/Napp/dbalcore.svg?branch=master)](https://travis-ci.org/Napp/aclcore)
+[![Build Status](https://travis-ci.org/Napp/aclcore.svg?branch=master)](https://travis-ci.org/Napp/aclcore)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Napp/aclcore/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Napp/aclcore/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/Napp/aclcore/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Napp/aclcore/?branch=master)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
-
+[![codecov](https://codecov.io/gh/Napp/aclcore/branch/master/graph/badge.svg?token=08sBNyBvAR)](https://codecov.io/gh/Napp/aclcore/branch/master)
 
 Roles and Permissions for Laravel optimized for performance. 
 Every permission is registered through code instead of pivot tables. 
