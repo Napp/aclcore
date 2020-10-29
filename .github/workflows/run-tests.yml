@@ -9,14 +9,14 @@ jobs:
       mysql-service:
         image: mysql:5.7
         env:
-          MYSQL_ROOT_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          MYSQL_ROOT_PASSWORD: somepassword123
           MYSQL_DATABASE: db_test
         ports:
           - 33306:3306
     strategy:
       fail-fast: true
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-latest]
         php: [7.4]
         laravel: [8.*]
         dependency-version: [prefer-lowest, prefer-stable]
@@ -54,5 +54,5 @@ jobs:
           DB_DATABASE: db_test
           DB_PORT: 33306
           DB_USER: root
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          DB_PASSWORD: somepassword123
         run: vendor/bin/phpunit
